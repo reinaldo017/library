@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styles/styles.css">
+        <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand:wght@300;400&display=swap" rel="stylesheet" type="text/css">
+        <title>Library</title>
+    </head>
+    <body>
+        <header class="header">
+            <h1 class="header__title">LIBRARY</h1>
+            <button class="header__button">NEW BOOK</button>
+        </header>
+        <main class="main">
+            <!--
+            <article class="card">
+                <h2 class="card__title">100 años de soledad</h2>
+                <p class="card__paragraph">by Gabriel García Marquez, 471 pages, already readed</p>
+                <button class="card__remove">Remove</button>
+            </article>
+            -->
+        </main>
+        <!--Form-->
+        <div class="overlay">
+        </div>
+        <form class="form">
+            <h2 class="form__header">Add a New Book</h2>
+            <!--Title-->
+            <div class="form__section">
+                <label class="form__label" for="title">Title</label>
+                <input class="form__input" id="title" type="text" name="title" placeholder="Name of the book?" required/>
+            </div>
+            <!--Author-->
+            <div class="form__section">
+                <label class="form__label" for="author">Author</label>
+                <input class="form__input" id="author" type="text" name="author" placeholder="Who wrote the book?" required/>
+            </div>
+            <!--Pages-->
+            <div class="form__section">
+                <label class="form__label" for="pages">Number of Pages</label>
+                <input class="form__input" id="pages" type="number" name="pages" placeholder="How many pages?" required/>
+            </div>
+
+            <button class="form__button" type="submit">To My Library</button>
+        </form>
+    </body>
+    <script src="./src/script.js"></script>
+</html>

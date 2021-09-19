@@ -1,0 +1,21 @@
+//Variables
+$white: #fff;
+$gray: #424242;
+$desktop-size: 1200px;
+$tablet-size: 900px;
+
+//Mixins
+@mixin vertical-align($justify-content, $align-items) {
+    display: flex;
+    flex-direction: column;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+@mixin horizontal-align($justify-content, $align-items) {
+    display: flex;
+    flex-direction: row;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+

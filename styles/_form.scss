@@ -1,0 +1,82 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    transform: scale(0);
+
+    &--show {
+        transform: scale(1);
+    }
+}
+
+.form {
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    z-index: 2;
+    background-color: $white;
+    color: $gray;
+    width: 80vw;
+    min-width: 18.7rem;
+    margin: 2rem auto;
+    border-radius: 1rem;
+    transform: scale(0);
+    transition: transform 100ms ease-out;
+    @include vertical-align(space-around, center);
+
+    @media screen and (min-width:$tablet-size) {
+        top: 2vh;
+        left: 30vw;
+        width: 40vw;
+    }
+
+    &--show {
+        transform: scale(1);
+    }
+
+    &__header {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 2rem;        
+    }
+
+    &__section {
+        width: 80%;
+        margin: 1rem 2rem;
+        @include vertical-align(space-around, center);
+    }
+
+    &__label {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    &__input {
+        font-size: 0.7rem;
+        font-weight: bold;
+
+        @media screen and (min-width: $tablet-size) {
+            font-size: 0.9rem;
+        }
+    }
+
+    &__input {
+        width: 80%;
+        padding: 1rem 2rem;
+        margin: 1rem;        
+    }
+
+    &__button {
+        padding: 1em;
+        margin-bottom: 2rem;
+        background: rgba(187, 178, 178, 0);
+        color: $gray;
+        font-weight: bold;
+        border: 2px solid $gray;
+        cursor: pointer;
+    }
+}

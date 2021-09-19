@@ -1,0 +1,20 @@
+.header {
+    @include horizontal-align(space-between, center);
+    margin: 2rem 3rem;
+    max-width: 81.2rem;
+
+    &__title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        text-align: center;
+        color: $white;
+    }
+
+    &__button {
+        padding: 1em;
+        background: rgba(0,0,0,0);
+        color: $white;
+        border: 1px solid $white;
+        cursor: pointer;
+    }
+}
