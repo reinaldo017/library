@@ -19,3 +19,11 @@ $tablet-size: 900px;
     align-items: $align-items;
 }
 
+//Placeholders
+%button {
+    margin: 0;
+    padding: 0.5em;
+    border: 0;
+    color: $white;
+    cursor: pointer;  
+}

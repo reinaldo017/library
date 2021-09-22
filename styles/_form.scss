@@ -22,6 +22,7 @@
     color: $gray;
     width: 80vw;
     min-width: 18.7rem;
+    min-height: 70vh;
     margin: 2rem auto;
     border-radius: 1rem;
     transform: scale(0);
@@ -52,22 +53,28 @@
 
     &__label {
         font-size: 1.5rem;
+        font-weight: 300;
         text-align: center;
     }
 
     &__input {
         font-size: 0.7rem;
         font-weight: bold;
-
+        width: 80%;
+        padding: 1rem 2rem;
+        margin: 1rem;  
         @media screen and (min-width: $tablet-size) {
             font-size: 0.9rem;
         }
     }
 
-    &__input {
-        width: 80%;
-        padding: 1rem 2rem;
-        margin: 1rem;        
+    &__radio-container {
+        margin: 0 auto;
+        @include horizontal-align(center, center);
+    }
+
+    &__radio {
+        @include horizontal-align(center, center);
     }
 
     &__button {

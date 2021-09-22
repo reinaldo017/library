@@ -6,13 +6,13 @@ const form = document.querySelector('.form');
 const formButton = document.querySelector('.form__button');
 
 /***Object Constructor***/
-function Book (title, author, pages, readed) {
+function Book (title, author, pages, read) {
     this.title = title,
     this.author = author,
     this.pages = pages,
-    this.readed = false,
+    this.read = read,
     this.info = function () {
-        return `by ${this.author}, ${this.pages} pages, ${readed ? 'already readed' : 'not read'}`;
+        return `by ${this.author}, ${this.pages} pages, ${this.read ? 'read' : 'not read'}`;
     }
 }
 
@@ -22,8 +22,10 @@ function getNewBook() {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
+    const yes = document.getElementById('yes');
+    const read = yes.checked;
 
-    return new Book(title, author, pages, false );
+    return new Book(title, author, pages, read );
 }
 
 //Book Exist?
@@ -44,7 +46,11 @@ function createCard(book) {
     card.innerHTML = 
         `<h2 class='card__title'>${book.title}</h2>
         <p class='card__paragraph'>${book.info()}</p>
-        <button class="card__remove">Remove</button>`
+        <div class="card__buttons">
+            <button class="card__read">${book.read ? 'Not Read' : 'Mark as Read'}</button>
+            <button class="card__remove">Remove</button>
+        </div>
+        `
     ;
     return card;
 }
@@ -80,6 +86,13 @@ function assignCardsIndexes() {
     }
 }
 
+//Assign Click Listeners to Multiple Elements
+function assignListeners(elements, handlerFunc) {
+    elements.forEach(element => {
+        element.addEventListener('click', handlerFunc);
+    })
+} 
+
 /***Event Handlers***/
 
 //Toggle Form
@@ -95,11 +108,25 @@ function toggleForm(event) {
 }
 
 //Remove Card
-function removeCard(event) {
-    const cardIndex = parseInt(event.target.parentElement.getAttribute('data-index'), 10); //string to number
-    const cardToRemove = event.target.parentElement;
+function removeCard({ target }) {
+    const cardToRemove = target.parentElement.parentElement;
+    const cardIndex = parseInt(cardToRemove.getAttribute('data-index'), 10); //string to number
     document.querySelector('.main').removeChild(cardToRemove);
     myLibrary.splice(cardIndex, 1);
+}
+
+//Change Read Status
+function toggleRead({ target }) {
+    const card = target.parentElement.parentElement;
+    const cardIndex = parseInt(card.getAttribute('data-index'), 10);
+    const book = myLibrary[cardIndex];
+    book.read = !book.read; // change book status
+    const p = card.querySelector('.card__paragraph'); // card paragraph element
+    p.innerText = `${book.info()}`; // update paragraph text
+    // update the button text
+    const readButton = card.querySelector('.card__read');
+    readButton.innerText = book.read ? 'Not Read' : 'Mark as Read';
+    
 }
 
 //Handle submit form
@@ -115,10 +142,11 @@ function handleSubmit(event) {
     assignCardsIndexes()
 
     //Adding event listeners to cards' buttons
-    let removeButtons = document.querySelectorAll('.card__remove');
-    removeButtons.forEach(button => {
-    button.addEventListener('click', removeCard);
-    })
+    let removeButtons = document.querySelectorAll('.card__remove');   
+    let readButtons = document.querySelectorAll('.card__read');
+
+    assignListeners(removeButtons, removeCard);
+    assignListeners(readButtons, toggleRead);
 }
 
 /***Adding Event Listeners***/

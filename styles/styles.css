@@ -1,3 +1,11 @@
+.card__read, .card__remove {
+  margin: 0;
+  padding: 0.5em;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -109,15 +117,34 @@ a {
   margin-right: 1rem;
 }
 
-.card__remove {
+.card__buttons {
   -ms-flex-item-align: end;
       align-self: flex-end;
   margin: 1rem;
-  padding: 0.5em;
-  border: 0;
+  width: 40%;
+  min-width: 10rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card__read {
+  background-color: rgba(0, 151, 167, 0.6);
+  min-width: 5.6rem;
+}
+
+.card__remove {
   background: rgba(244, 67, 54, 0.6);
-  color: #fff;
-  cursor: pointer;
 }
 
 .overlay {
@@ -146,6 +173,7 @@ a {
   color: #424242;
   width: 80vw;
   min-width: 18.7rem;
+  min-height: 70vh;
   margin: 2rem auto;
   border-radius: 1rem;
   -webkit-transform: scale(0);
@@ -206,12 +234,16 @@ a {
 
 .form__label {
   font-size: 1.5rem;
+  font-weight: 300;
   text-align: center;
 }
 
 .form__input {
   font-size: 0.7rem;
   font-weight: bold;
+  width: 80%;
+  padding: 1rem 2rem;
+  margin: 1rem;
 }
 
 @media screen and (min-width: 900px) {
@@ -220,10 +252,37 @@ a {
   }
 }
 
-.form__input {
-  width: 80%;
-  padding: 1rem 2rem;
-  margin: 1rem;
+.form__radio-container {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.form__radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .form__button {

@@ -29,13 +29,22 @@
         margin-right: 1rem;
     }
 
-    &__remove {
+    &__buttons {
         align-self: flex-end;
         margin: 1rem;
-        padding: 0.5em;
-        border: 0;
+        width: 40%;
+        min-width: 10rem;
+        @include horizontal-align(space-between, center);
+    }
+
+    &__read {
+        background-color: rgba(0, 151, 167, 0.6);
+        min-width: 5.6rem;
+        @extend %button;
+    }
+
+    &__remove {
         background: rgba(244, 67, 54, 0.6);
-        color: $white;
-        cursor: pointer;    
+        @extend %button;
     }
 }
