@@ -151,7 +151,7 @@ function toggleRead({ target }) {
     const p = card.querySelector('.card__paragraph'); 
     p.innerText = `${book.info()}`; // update paragraph text
     const readButton = card.querySelector('.card__read');
-    readButton.innerText = book.read ? 'Not Read' : 'Mark as Read'; // update the button text
+    readButton.innerText = book.read ? 'Not Read Yet' : 'Mark as Read'; // update the button text
     
 }
 
