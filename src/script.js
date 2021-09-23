@@ -8,10 +8,9 @@ const formButton = document.querySelector('.form__button');
 /**Prototype Object***/
 const Book = {
     info: function () {
-        return `by ${this.author}, ${this.pages} pages, ${this.read ? 'read' : 'not read'}`;
+        return `by ${this.author}, ${this.pages} pages, ${this.read ? 'read' : 'not read yet'}`;
     }
 }
-
 
 //***Helper Fuctions***/
 //Create Book
@@ -49,7 +48,7 @@ function createCard(book) {
         `<h2 class='card__title'>${book.title}</h2>
         <p class='card__paragraph'>${book.info()}</p>
         <div class="card__buttons">
-            <button class="card__read">${book.read ? 'Not Read' : 'Mark as Read'}</button>
+            <button class="card__read">${book.read ? 'Not Read Yet' : 'Mark as Read'}</button>
             <button class="card__remove">Remove</button>
         </div>
         `

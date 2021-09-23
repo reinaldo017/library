@@ -56,7 +56,7 @@ a {
 
 .header__title {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: 1.6rem;
   text-align: center;
   color: #fff;
 }
@@ -82,7 +82,23 @@ a {
   grid-auto-rows: 1fr;
   grid-auto-columns: 1fr;
   margin: 2rem;
+  padding-bottom: 10rem;
   gap: 2rem;
+}
+
+@media screen and (min-width: 900px) {
+  .main {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .main {
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+  }
 }
 
 .card {
@@ -105,6 +121,12 @@ a {
   margin: 0 auto;
 }
 
+@media screen and (min-width: 1200px) {
+  .card {
+    max-width: 21.8rem;
+  }
+}
+
 .card__title {
   font-family: 'Playfair Display', serif;
   text-align: center;
@@ -113,6 +135,7 @@ a {
 }
 
 .card__paragraph {
+  text-align: center;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -143,8 +166,16 @@ a {
   min-width: 5.6rem;
 }
 
+.card__read:active {
+  background-color: #0097a7;
+}
+
 .card__remove {
   background: rgba(244, 67, 54, 0.6);
+}
+
+.card__remove:active {
+  background-color: #f44336;
 }
 
 .overlay {
@@ -154,7 +185,6 @@ a {
   z-index: 1;
   width: 100vw;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
   -webkit-transform: scale(0);
           transform: scale(0);
 }
@@ -166,22 +196,17 @@ a {
 
 .form {
   position: absolute;
-  top: 10vh;
+  top: 1rem;
   left: 10vw;
   z-index: 2;
   background-color: #fff;
   color: #424242;
   width: 80vw;
   min-width: 18.7rem;
-  min-height: 70vh;
   margin: 2rem auto;
   border-radius: 1rem;
   -webkit-transform: scale(0);
           transform: scale(0);
-  -webkit-transition: -webkit-transform 100ms ease-out;
-  transition: -webkit-transform 100ms ease-out;
-  transition: transform 100ms ease-out;
-  transition: transform 100ms ease-out, -webkit-transform 100ms ease-out;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -205,14 +230,14 @@ a {
 }
 
 .form--show {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 .form__header {
   font-size: 1.5rem;
   text-align: center;
-  margin: 2rem;
+  margin-top: 1.5rem;
 }
 
 .form__section {
@@ -233,7 +258,7 @@ a {
 }
 
 .form__label {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 300;
   text-align: center;
 }
@@ -242,7 +267,7 @@ a {
   font-size: 0.7rem;
   font-weight: bold;
   width: 80%;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   margin: 1rem;
 }
 
@@ -285,9 +310,15 @@ a {
           align-items: center;
 }
 
+.form__radio .form__input {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+}
+
 .form__button {
   padding: 1em;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   background: rgba(187, 178, 178, 0);
   color: #424242;
   font-weight: bold;
