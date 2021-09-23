@@ -155,7 +155,7 @@ function toggleRead({ target }) {
     
 }
 
-//Handle submit form
+//Handle Submit Form
 function handleSubmit(event) {
     event.preventDefault();
     const newBook = getNewBook();
@@ -174,7 +174,7 @@ function handleSubmit(event) {
     assignListeners(readButtons, toggleRead);
 }
 
-//Handle page load
+//Handle Page Load
 function handleLoad() {
     loadBooks();
     myLibrary.forEach(book => {
