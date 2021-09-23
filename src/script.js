@@ -5,19 +5,16 @@ const newBookButton = document.querySelector('.header__button');
 const form = document.querySelector('.form');
 const formButton = document.querySelector('.form__button');
 
-/***Object Constructor***/
-function Book (title, author, pages, read) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read,
-    this.info = function () {
+/**Prototype Object***/
+const Book = {
+    info: function () {
         return `by ${this.author}, ${this.pages} pages, ${this.read ? 'read' : 'not read'}`;
     }
 }
 
+
 //***Helper Fuctions***/
-//Get New Book
+//Create Book
 function getNewBook() {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
@@ -25,7 +22,12 @@ function getNewBook() {
     const yes = document.getElementById('yes');
     const read = yes.checked;
 
-    return new Book(title, author, pages, read );
+    let newBook = Object.create(Book);
+    newBook.title = title;
+    newBook.author = author;
+    newBook.pages = pages;
+    newBook.read = read;
+    return newBook;
 }
 
 //Book Exist?
@@ -55,11 +57,11 @@ function createCard(book) {
     return card;
 }
 
-//Verify if card is already displayed
+//Verify if Card is Already Displayed
 function isCardDisplayed(card) {
-    const displayedCards = document.querySelector('.main').children; // it's not an Array, is a HTMLCollection
-    let result = null; //initializing value
+    const displayedCards = document.querySelector('.main').children;
     //Compare to displayed cards
+    let result = null;
     for (let i = 0; i < displayedCards.length; i++) {
         if (displayedCards[i] === card) {
             result = true;
@@ -70,7 +72,7 @@ function isCardDisplayed(card) {
     return result;
 }
 
-//Display Books
+//Display Book Card
 function displayBookCard(book) {
     const newCard = createCard(book);
     if (!isCardDisplayed(newCard)) {
@@ -78,11 +80,35 @@ function displayBookCard(book) {
     }
 }
 
-//Asign index to cards
+//Asign Indexes to Cards
 function assignCardsIndexes() {
     const displayedCards = document.querySelector('.main').children;
     for (let i = 0; i < displayedCards.length; i++) {
        displayedCards.item(i).setAttribute('data-index', i);
+    }
+}
+
+//Save Data Into localStorage
+function saveBooks() {
+    const booksData = JSON.stringify(myLibrary);
+    localStorage.setItem('myLibrary', booksData);
+}
+
+//Retrieve Data from localStorage
+function loadBooks() {
+    if (localStorage.length === 0) {
+        myLibrary = [];
+    } else {
+        const booksData = JSON.parse(localStorage.getItem('myLibrary')); //This returns an array containing objects, but the objects returned don't have 'Book' as prototype.
+        //So we fix that:
+        booksData.forEach(bookData => {
+            let book = Object.create(Book);
+            book.title = bookData.title;
+            book.author = bookData.author;
+            book.pages = bookData.pages;
+            book.read = bookData.read;
+            myLibrary.push(book);
+        })
     }
 }
 
@@ -91,13 +117,12 @@ function assignListeners(elements, handlerFunc) {
     elements.forEach(element => {
         element.addEventListener('click', handlerFunc);
     })
-} 
+}
 
 /***Event Handlers***/
-
 //Toggle Form
-function toggleForm(event) {
-    if (event.target === newBookButton) {
+function toggleForm({ target }) {
+    if (target === newBookButton) {
         overlay.classList.add('overlay--show');
         form.classList.add('form--show');
     } else {
@@ -113,6 +138,8 @@ function removeCard({ target }) {
     const cardIndex = parseInt(cardToRemove.getAttribute('data-index'), 10); //string to number
     document.querySelector('.main').removeChild(cardToRemove);
     myLibrary.splice(cardIndex, 1);
+    assignCardsIndexes();
+    saveBooks();
 }
 
 //Change Read Status
@@ -121,11 +148,11 @@ function toggleRead({ target }) {
     const cardIndex = parseInt(card.getAttribute('data-index'), 10);
     const book = myLibrary[cardIndex];
     book.read = !book.read; // change book status
-    const p = card.querySelector('.card__paragraph'); // card paragraph element
+    saveBooks();
+    const p = card.querySelector('.card__paragraph'); 
     p.innerText = `${book.info()}`; // update paragraph text
-    // update the button text
     const readButton = card.querySelector('.card__read');
-    readButton.innerText = book.read ? 'Not Read' : 'Mark as Read';
+    readButton.innerText = book.read ? 'Not Read' : 'Mark as Read'; // update the button text
     
 }
 
@@ -137,19 +164,33 @@ function handleSubmit(event) {
         alert('Book Already Exist');
     } else {
         myLibrary.push(newBook);
+        saveBooks();
         displayBookCard(newBook);
     }
     assignCardsIndexes()
-
     //Adding event listeners to cards' buttons
     let removeButtons = document.querySelectorAll('.card__remove');   
-    let readButtons = document.querySelectorAll('.card__read');
+    let readButtons = document.querySelectorAll('.card__read');    
+    assignListeners(removeButtons, removeCard);
+    assignListeners(readButtons, toggleRead);
+}
 
+//Handle page load
+function handleLoad() {
+    loadBooks();
+    myLibrary.forEach(book => {
+        displayBookCard(book);
+    })
+    assignCardsIndexes();
+    //Adding event listeners to cards' buttons
+    let removeButtons = document.querySelectorAll('.card__remove');   
+    let readButtons = document.querySelectorAll('.card__read');  
     assignListeners(removeButtons, removeCard);
     assignListeners(readButtons, toggleRead);
 }
 
 /***Adding Event Listeners***/
+window.addEventListener('load', handleLoad);
 newBookButton.addEventListener('click', toggleForm);
 overlay.addEventListener('click', toggleForm);
 formButton.addEventListener('click', handleSubmit);
