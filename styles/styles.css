@@ -69,6 +69,10 @@ a {
   cursor: pointer;
 }
 
+.header__button:active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 .main {
   display: -ms-grid;
   display: grid;
@@ -86,7 +90,7 @@ a {
   gap: 2rem;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 600px) {
   .main {
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
@@ -198,15 +202,17 @@ a {
   position: absolute;
   top: 1rem;
   left: 10vw;
-  z-index: 2;
+  z-index: 1;
   background-color: #fff;
   color: #424242;
   width: 80vw;
   min-width: 18.7rem;
+  max-width: 30.6rem;
   margin: 2rem auto;
   border-radius: 1rem;
   -webkit-transform: scale(0);
           transform: scale(0);
+  font-family: 'Playfair Display', serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -221,17 +227,18 @@ a {
           align-items: center;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 600px) {
   .form {
     top: 2vh;
-    left: 30vw;
-    width: 40vw;
+    left: 20vw;
+    right: 20vw;
+    width: 60vw;
   }
 }
 
 .form--show {
-  -webkit-transform: scale(0.95);
-          transform: scale(0.95);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .form__header {
@@ -271,7 +278,7 @@ a {
   margin: 1rem;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 600px) {
   .form__input {
     font-size: 0.9rem;
   }

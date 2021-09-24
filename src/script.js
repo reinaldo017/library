@@ -192,5 +192,5 @@ function handleLoad() {
 window.addEventListener('load', handleLoad);
 newBookButton.addEventListener('click', toggleForm);
 overlay.addEventListener('click', toggleForm);
-formButton.addEventListener('click', handleSubmit);
-formButton.addEventListener('click', toggleForm);
+form.addEventListener('submit', handleSubmit);
+form.addEventListener('submit', toggleForm);
